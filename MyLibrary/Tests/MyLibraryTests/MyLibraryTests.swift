@@ -1,7 +1,26 @@
 import XCTest
 import MyLibrary
+@testable import MyLibrary
 
 final class MyLibraryTests: XCTestCase {
+
+    func test1() async throws{
+    let weatherserv = WeatherServiceImpl()
+    let temperature = try await weatherserv.getTemperature()
+    print(temperature)
+    XCTAssertEqual(temperature,62)
+}
+func test2() async throws{
+    let weatherserv = WeatherServiceImpl()
+    let temperature = try await weatherserv.getTemperature()
+    print(temperature)
+    XCTAssert((temperature as Any) is Int)
+}
+
+    
+
+    
+
     func testIsLuckyBecauseWeAlreadyHaveLuckyNumber() async {
         // Given
         let mockWeatherService = MockWeatherService(
@@ -70,3 +89,4 @@ final class MyLibraryTests: XCTestCase {
     }
 
 }
+
