@@ -4,7 +4,22 @@ import MyLibrary
 
 final class MyLibraryTests: XCTestCase {
 
-    func CheckTemperature() throws {
+    func test1() async throws{
+    let weatherserv = WeatherServiceImpl()
+    let temperature = try await weatherserv.getTemperature()
+    print(temperature)
+    XCTAssertEqual(temperature,62)
+}
+func test2() async throws{
+    let weatherserv = WeatherServiceImpl()
+    let temperature = try await weatherserv.getTemperature()
+    print(temperature)
+    XCTAssert((temperature as Any) is Int)
+}
+
+    
+
+    func testNotNil() throws {
         //given
         let filePath = try XCTUnwrap(Bundle.module.path(forResource:"data",ofType:"json"))
         let jsonString = try String(contentsOfFile: filePath)
@@ -19,7 +34,7 @@ final class MyLibraryTests: XCTestCase {
         XCTAssertNotNil(weather.main.temp)
     }
 
-        func CheckFilePath() throws {
+        func testFilePath() throws {
         //given
         let filePath = try XCTUnwrap(Bundle.module.path(forResource:"data",ofType:"json"))
         let jsonString = try String(contentsOfFile: filePath)
@@ -32,7 +47,8 @@ final class MyLibraryTests: XCTestCase {
 
         //Then
         XCTAssertNotNil(filePath)
-        }
+    }
+
     func testIsLuckyBecauseWeAlreadyHaveLuckyNumber() async {
         // Given
         let mockWeatherService = MockWeatherService(
@@ -101,3 +117,4 @@ final class MyLibraryTests: XCTestCase {
     }
 
 }
+
